@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function login(){
+            const username=document.getElementById('username').value
+            const password=document.getElementById('password').value
+            try{
+                const response=await axios.post('http://localhost:1805/login', {
+                    username:username, password:password
+                })
+                alert(response.data.message)
+                localStorage.setItem("token", response.data.token)
+                window.location.href = 'home.html';
+            }catch(err){
+            alert(err.response.data.message)
+            }
+
+        }
+    </script>
+    <style>
+            body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            }
+        .entire{
+            margin-top: 110px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            border-radius: 20%;
+            color: black;
+            background-color: white;
+            width: 400px;
+            height: 450px;
+            h2{
+                font-size: 40px;
+                text-decoration: underline;
+            }
+            label{
+                font-size: 25px;
+            }
+            input{
+                width: 250px;
+                height: 35px;
+                border-radius: 10px;
+                border: none;
+                background-color: black;
+                color: aliceblue;
+            }
+            a{
+                color: white;
+                text-decoration: none;
+                font-size: 22px;
+
+            }
+            .divclass{
+                margin: 10px; }
+            
+            button{
+                width: 150px;
+                height: 35px;
+                border-radius: 10px;
+                border: none;
+                background-color: black;
+                color: aliceblue;
+                margin: 8px;
+            }
+            .but{
+                margin: 10px;
+                display: flex;
+                flex-direction: column;
+               justify-content: space-between;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="entire">
+       <h2> Login here</h2>
+        <div class="divclass">
+        <label for="">Enter Username</label>
+        <br>
+        <input type="text" id="username" required></div>
+        <div class="divclass">
+        <label for="">Enter password</label>
+        <br>
+        <input type="password" id="password" required></div>
+        <div class="but"><button onclick="login()">Login</button>
+        
+       <span> Not a user? &nbsp; </span>
+      
+       <button><a href="signup.html">Signup</a></button>
+       </div>
+    </div>
+</body>
+</html>
